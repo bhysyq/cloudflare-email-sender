@@ -1,4 +1,5 @@
 import { EmailMessage } from "cloudflare:email";
+import { createMimeMessage } from "mimetext";
 
 export default {
   async fetch(request, env, ctx) {
@@ -44,27 +45,20 @@ export default {
 };
 
 async function sendEmail(env, from, to, subject, html) {
-  const rawMessage = buildRawEmailMessage(from, to, subject, html);
+  const rawMessage = createMimeMessage();
+  rawMessage.setSender({ name: env.SENDER_NAME, addr: from });
+  rawMessage.setRecipient(to);
+  rawMessage.setSubject(subject);
+  rawMessage.addMessage({
+    contentType: 'text/plain',
+    data: html
+  });
 
   const message = new EmailMessage(
     from,
     to,
-    rawMessage
+    rawMessage.asRaw()
   );
 
   await env.EMAIL.send(message);
-}
-
-function buildRawEmailMessage(from, to, subject, html) {
-  const headers = [
-    'MIME-Version: 1.0',
-    `From: ${from}`,
-    `To: ${to}`,
-    `Subject: ${subject}`,
-    'Content-Type: text/html; charset=UTF-8',
-    '',
-    html
-  ];
-
-  return headers.join('\r\n');
 }

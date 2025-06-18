@@ -1,9 +1,18 @@
-name = "free-email-sender-api"
+name = "email-sender"
 main = "worker.js"
-compatibility_date = "2023-10-04"
+compatibility_date = "2025-05-05"
+compatibility_flags = ["nodejs_compat"]
 send_email = [
     {name = "EMAIL"},
 ]
 
 [vars]
-AUTH_TOKEN = "your_authorization_token"
+SENDER_NAME = "TODO_UPDATE_SENDER_NAME"
+AUTH_TOKEN = "TODO_UPDATE_AUTH_TOKEN"
+
+[observability.logs]
+enabled = true
+
+
+
+
