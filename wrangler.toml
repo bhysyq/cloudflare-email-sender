@@ -7,8 +7,9 @@ send_email = [
 ]
 
 [vars]
-SENDER_NAME = "TODO_UPDATE_SENDER_NAME"
 AUTH_TOKEN = "TODO_UPDATE_AUTH_TOKEN"
+SENDER_NAME = "TODO_UPDATE_SENDER_NAME"
+SENDER_EMAIL = "TODO_UPDATE_SENDER_EMAIL"
 
 [observability.logs]
 enabled = true
