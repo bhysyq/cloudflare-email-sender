@@ -6,6 +6,9 @@ Free and open source email sending API with Cloudflare workers and email forward
 
 [![Deploy to Cloudflare Workers](https://deploy.workers.cloudflare.com/button)](https://deploy.workers.cloudflare.com/?url=https://github.com/bhysyq/cloudflare-email-sender)
 
+
+Credit to https://github.com/manuelernestog.
+
 ## Features
 
 - **Send Emails**: Send emails by making a `POST` request to the `/send` endpoint.
@@ -65,7 +68,7 @@ Click the "Deploy to Cloudflare Workers" button above for one-click deployment.
 Deploy the worker using Wrangler:
 
 ```bash
-wrangler publish
+npx wrangler deploy
 ```
 
 ## Usage
@@ -84,7 +87,7 @@ wrangler publish
     "from": "sender@example.com",        // Optional - uses SENDER_EMAIL if not provided
     "to": "recipient@example.com",       // Required
     "subject": "Hello World",            // Required
-    "content": "<h1>It works!</h1>",     // Required (renamed from 'html')
+    "content": "<h1>It works!</h1>",     // Required
     "senderName": "Your Name",           // Optional - uses SENDER_NAME if not provided
     "contentType": "text/html"           // Optional - auto-detected if not provided
   }
@@ -99,7 +102,7 @@ curl -X POST https://your-worker-domain/send \
   -d '{
     "to": "recipient@example.com",
     "subject": "Hello World",
-    "content": "<h1>It works!</h1><p>This is HTML content</p>",
+    "content": "<html><head></head><body><b>Hello,</b>This is my test email sent from <i>Cloudflare</i>.</p></body></html>",
     "from": "sender@example.com",
     "senderName": "Your Name",
     "contentType": "text/html"
